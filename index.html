@@ -228,18 +228,66 @@
     Inventory app notes
   </a>
   
-    <nav class="md-nav" aria-label="Inventory app notes">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#app-router" class="md-nav__link">
+    App router
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#some-interesting-components" class="md-nav__link">
+    Some interesting components
+  </a>
+  
+    <nav class="md-nav" aria-label="Some interesting components">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#deploy-vue-app-from-nginx" class="md-nav__link">
-    Deploy Vue app from nginx
+  <a href="#rich-text-editor" class="md-nav__link">
+    Rich text editor
   </a>
   
 </li>
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vue-app-with-quarkus-app" class="md-nav__link">
+    Vue app with quarkus app
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vue-service-to-call-backend-api" class="md-nav__link">
+    Vue service to call backend api
+  </a>
+  
+    <nav class="md-nav" aria-label="Vue service to call backend api">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-reference-data" class="md-nav__link">
+    Load reference data
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vue-app-deployment" class="md-nav__link">
+    Vue app deployment
+  </a>
   
 </li>
       
@@ -299,18 +347,66 @@
     Inventory app notes
   </a>
   
-    <nav class="md-nav" aria-label="Inventory app notes">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#app-router" class="md-nav__link">
+    App router
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#some-interesting-components" class="md-nav__link">
+    Some interesting components
+  </a>
+  
+    <nav class="md-nav" aria-label="Some interesting components">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#deploy-vue-app-from-nginx" class="md-nav__link">
-    Deploy Vue app from nginx
+  <a href="#rich-text-editor" class="md-nav__link">
+    Rich text editor
   </a>
   
 </li>
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vue-app-with-quarkus-app" class="md-nav__link">
+    Vue app with quarkus app
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vue-service-to-call-backend-api" class="md-nav__link">
+    Vue service to call backend api
+  </a>
+  
+    <nav class="md-nav" aria-label="Vue service to call backend api">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-reference-data" class="md-nav__link">
+    Load reference data
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vue-app-deployment" class="md-nav__link">
+    Vue app deployment
+  </a>
   
 </li>
       
@@ -342,10 +438,11 @@
                 
                 
                 <h1 id="vuejs-studies">Vue.js studies</h1>
-<p>A progressive framework to be used in existing js is needed. It is reactive in the data binding mode. </p>
+<p>A progressive framework to be used in existing js app if needed. It is reactive in the data binding mode.</p>
 <h2 id="getting-started">Getting Started</h2>
 <ul>
-<li>Get vue cli</li>
+<li>Get vue cli: <code>npm install -g @vue/cli@next</code>.</li>
+<li>Start the <code>vue ui</code> to create a project and manage the build and every thing or...</li>
 <li>Create a new project: <code>vue create project-name</code></li>
 <li>Start server: <code>npm run serve</code> or <code>yarn serve</code></li>
 <li>Browser to <a href="http://localhost:8080">http://localhost:8080</a></li>
@@ -409,7 +506,7 @@ When using v-for it is recommended to give each rendered element its own unique 
 <li>Data can be bound to an element’s style attribute, an element’s class. We can use expressions inside an element’s class binding to evaluate whether a class should appear or not.</li>
 <li>Computed properties calculate a value rather than store a value.</li>
 <li>
-<p>Components are blocks of code, grouped together within a custom element. They make applications more manageable by breaking up the whole into reusuable parts that have their own structure and behavior. </p>
+<p>Components are blocks of code, grouped together within a custom element. They make applications more manageable by breaking up the whole into reusable parts that have their own structure and behavior. </p>
 </li>
 <li>
 <p>Data on a component must be a function</p>
@@ -421,10 +518,205 @@ When using v-for it is recommended to give each rendered element its own unique 
 <p>Vue dev tools provide helpful insight about your components</p>
 </li>
 </ul>
-<h3 id="deploy-vue-app-from-nginx">Deploy Vue app from nginx</h3>
+<h2 id="app-router">App router</h2>
+<ul>
+<li>Add a router folder with an index.js to declare routes:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="nx">Vue</span> <span class="nx">from</span> <span class="s1">&#39;vue&#39;</span>
+<span class="kr">import</span> <span class="nx">VueRouter</span> <span class="nx">from</span> <span class="s1">&#39;vue-router&#39;</span>
+<span class="kr">import</span> <span class="nx">Home</span> <span class="nx">from</span> <span class="s1">&#39;../views/Home.vue&#39;</span>
+
+<span class="nx">Vue</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">VueRouter</span><span class="p">)</span>
+
+<span class="kr">const</span> <span class="nx">routes</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span>
+      <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;home&#39;</span><span class="p">,</span>
+      <span class="nx">component</span><span class="o">:</span> <span class="nx">Home</span>
+    <span class="p">}</span>
+<span class="p">]</span>
+<span class="kr">const</span> <span class="nx">router</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">VueRouter</span><span class="p">({</span>
+    <span class="nx">routes</span>
+  <span class="p">})</span>
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">router</span>
+</code></pre></div>
+
+<ul>
+<li>Change the main App.vue by adding a content and a router-view object, remove the component declaration in the script section</li>
+</ul>
+<div class="highlight"><pre><span></span><code> <span class="nt">&lt;v-content&gt;</span>
+      <span class="nt">&lt;v-container&gt;</span>
+        <span class="nt">&lt;router-view</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;/v-container&gt;</span>
+    <span class="nt">&lt;/v-content&gt;</span> 
+</code></pre></div>
+
+<h2 id="some-interesting-components">Some interesting components</h2>
+<h3 id="rich-text-editor">Rich text editor</h3>
+<p><a href="https://github.com/davidroyer/vue2-editor">Vue2 Editor</a> and used in person-manager app:</p>
+<div class="highlight"><pre><span></span><code><span class="o">&lt;</span><span class="nx">v</span><span class="o">-</span><span class="nx">col</span> <span class="nx">cols</span><span class="o">=</span><span class="s2">&quot;12&quot;</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nx">vue</span><span class="o">-</span><span class="nx">editor</span> <span class="nx">v</span><span class="o">-</span><span class="nx">model</span><span class="o">=</span><span class="s2">&quot;item.text&quot;</span><span class="o">&gt;&lt;</span><span class="err">/vue-editor&gt;</span>
+<span class="o">&lt;</span><span class="err">/v-col&gt;</span>
+
+<span class="p">...</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">VueEditor</span> <span class="p">}</span> <span class="nx">from</span> <span class="s2">&quot;vue2-editor&quot;</span>
+<span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
+  <span class="nx">components</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">CardList</span><span class="p">,</span>
+    <span class="nx">VueEditor</span>
+  <span class="p">},</span>
+</code></pre></div>
+
+<h2 id="vue-app-with-quarkus-app">Vue app with quarkus app</h2>
+<p>Here are the steps to integrate Vue app in a Quarkus app and develop both in parallel:</p>
+<ul>
+<li>Add <a href="https://mvnrepository.com/artifact/com.github.eirslett/frontend-maven-plugin">frontend-maven-plugin</a> into the pom.xml to be able to build the JS app with maven:</li>
+</ul>
+<p><div class="highlight"><pre><span></span><code><span class="c">&lt;!-- in properies--&gt;</span>
+<span class="nt">&lt;version.frontend-maven-plugin&gt;</span>1.10.0<span class="nt">&lt;/version.frontend-maven-plugin&gt;</span>
+<span class="nt">&lt;version.resources-plugin&gt;</span>3.2.0<span class="nt">&lt;/version.resources-plugin&gt;</span>
+<span class="c">&lt;!-- in plugins --&gt;</span>
+<span class="nt">&lt;plugin&gt;</span>
+      <span class="nt">&lt;groupId&gt;</span>com.github.eirslett<span class="nt">&lt;/groupId&gt;</span>
+      <span class="nt">&lt;artifactId&gt;</span>frontend-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
+      <span class="nt">&lt;version&gt;</span>${version.frontend-maven-plugin}<span class="nt">&lt;/version&gt;</span>
+      <span class="nt">&lt;configuration&gt;</span>
+        <span class="nt">&lt;workingDirectory&gt;</span>webapp<span class="nt">&lt;/workingDirectory&gt;</span>
+      <span class="nt">&lt;/configuration&gt;</span>
+    <span class="nt">&lt;/plugin&gt;</span>
+</code></pre></div>
+* Create the vue app under the <code>webapp</code> folder: <code>vue create webapp</code>
+* Remove src/main/resources/META-INF/resources/index.html from quarkus app
+* Using the <a href="https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-resources-plugin">maven resource plugin</a>, add to the pom the copy of the built webapp to the directory used by Quarkus</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;plugin&gt;</span>
+  <span class="nt">&lt;artifactId&gt;</span>maven-resources-plugin<span class="nt">&lt;/artifactId&gt;</span>
+  <span class="nt">&lt;version&gt;</span>${version.resources-plugin}<span class="nt">&lt;/version&gt;</span>
+  <span class="nt">&lt;executions&gt;</span>
+    <span class="nt">&lt;execution&gt;</span>
+      <span class="nt">&lt;id&gt;</span>copy-resources<span class="nt">&lt;/id&gt;</span>
+      <span class="nt">&lt;phase&gt;</span>process-resources<span class="nt">&lt;/phase&gt;</span>
+      <span class="nt">&lt;goals&gt;</span>
+        <span class="nt">&lt;goal&gt;</span>copy-resources<span class="nt">&lt;/goal&gt;</span>
+      <span class="nt">&lt;/goals&gt;</span>
+      <span class="nt">&lt;configuration&gt;</span>
+        <span class="nt">&lt;outputDirectory&gt;</span>${basedir}/target/classes/META-INF/resources/<span class="nt">&lt;/outputDirectory&gt;</span>
+        <span class="nt">&lt;resources&gt;</span>
+          <span class="nt">&lt;resource&gt;</span>
+            <span class="nt">&lt;directory&gt;</span>webapp/dist<span class="nt">&lt;/directory&gt;</span>
+            <span class="nt">&lt;filtering&gt;</span>false<span class="nt">&lt;/filtering&gt;</span>
+          <span class="nt">&lt;/resource&gt;</span>
+        <span class="nt">&lt;/resources&gt;</span>
+      <span class="nt">&lt;/configuration&gt;</span>
+    <span class="nt">&lt;/execution&gt;</span>
+  <span class="nt">&lt;/executions&gt;</span>
+<span class="nt">&lt;/plugin&gt;</span>
+</code></pre></div>
+
+<ul>
+<li>Could add a maven profile to update the UI dependencies, but could also be done by <code>Vue</code> and <code>yarn</code> build.</li>
+<li>Add a build UI maven profile, </li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;profile&gt;</span>
+      <span class="nt">&lt;id&gt;</span>Build the UI<span class="nt">&lt;/id&gt;</span>
+      <span class="nt">&lt;activation&gt;</span>
+        <span class="nt">&lt;property&gt;</span>
+          <span class="nt">&lt;name&gt;</span>ui.dev<span class="nt">&lt;/name&gt;</span>
+        <span class="nt">&lt;/property&gt;</span>
+      <span class="nt">&lt;/activation&gt;</span>
+      <span class="nt">&lt;build&gt;</span>
+        <span class="nt">&lt;plugins&gt;</span>
+          <span class="nt">&lt;plugin&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>com.github.eirslett<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>frontend-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;executions&gt;</span>
+              <span class="nt">&lt;execution&gt;</span>
+                <span class="nt">&lt;id&gt;</span>yarn run build<span class="nt">&lt;/id&gt;</span>
+                <span class="nt">&lt;goals&gt;</span>
+                  <span class="nt">&lt;goal&gt;</span>yarn<span class="nt">&lt;/goal&gt;</span>
+                <span class="nt">&lt;/goals&gt;</span>
+                <span class="nt">&lt;configuration&gt;</span>
+                  <span class="nt">&lt;arguments&gt;</span>run build --output-hashing=all<span class="nt">&lt;/arguments&gt;</span>
+                <span class="nt">&lt;/configuration&gt;</span>
+              <span class="nt">&lt;/execution&gt;</span>
+            <span class="nt">&lt;/executions&gt;</span>
+          <span class="nt">&lt;/plugin&gt;</span>
+        <span class="nt">&lt;/plugins&gt;</span>
+      <span class="nt">&lt;/build&gt;</span>
+    <span class="nt">&lt;/profile&gt;</span>
+</code></pre></div>
+
+<p>To build the webapp for production. This could be run with:</p>
+<div class="highlight"><pre><span></span><code>mvn package quarkus:dev -Dui.deps -Dui.dev
+
+<span class="c1"># OR in the vue folder do</span>
+yarn build 
+<span class="c1"># in root folder</span>
+mvn package -DskipTests
+</code></pre></div>
+
+<ul>
+<li>When doing development run the <code>vue serve</code> and <code>quarkus:dev</code> into two different terminals but add a proxy configuration (file vue.config.js) for vue to match /api route to backend, and uses another port than 8080:</li>
+</ul>
+<p><code>js
+ module.exports = {
+  devServer: {
+    proxy: {
+      '^/api': {
+        target: 'http://localhost:8080',
+        changeOrigin: true
+      },
+    },
+     port: 4545
+  }
+}</code></p>
+<ul>
+<li>Add Quarkus resource with API definition</li>
+</ul>
+<div class="highlight"><pre><span></span><code>    <span class="nd">@GET</span>
+    <span class="nd">@Path</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">)</span>
+    <span class="nd">@Produces</span><span class="p">(</span><span class="n">MediaType</span><span class="p">.</span><span class="na">TEXT_PLAIN</span><span class="p">)</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">hello</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="s">&quot;hello a toi l etranger&quot;</span><span class="p">;</span>
+    <span class="p">}</span>
+</code></pre></div>
+
+<ul>
+<li>Install axios as a library to access remote server: <code>yarn install axios</code></li>
+<li>Add calls to api using axios in the component which needs the data.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">&#39;axios</span>
+<span class="s1">export default {</span>
+<span class="s1">  name: &#39;</span><span class="nx">HelloWorld</span><span class="s1">&#39;,</span>
+<span class="s1">  data() { return {</span>
+<span class="s1">    msg: &#39;&#39;</span>
+<span class="s1">  }</span>
+<span class="s1">  },</span>
+<span class="s1">  mounted() {</span>
+<span class="s1">    axios.get(&#39;</span><span class="o">/</span><span class="nx">api</span><span class="o">/</span><span class="nx">v1</span><span class="o">/</span><span class="nx">persons</span><span class="o">/</span><span class="nx">hello</span><span class="err">&#39;</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">resp</span> <span class="p">=&gt;</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">msg</span><span class="o">=</span> <span class="nx">resp</span><span class="p">.</span><span class="nx">data</span> <span class="p">))</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h2 id="vue-service-to-call-backend-api">Vue service to call backend api</h2>
+<p>To call backend API, we need to add service and use the Promise based HTTP client:<a href="https://github.com/axios/axios">axios</a> with some <a href="https://vuejs.org/v2/cookbook/using-axios-to-consume-apis.html">Vue samples, here</a></p>
+<h3 id="load-reference-data">Load reference data</h3>
+<div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s2">&quot;axios&quot;</span><span class="p">;</span>
+<span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
+<span class="nx">data</span><span class="o">:</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">({</span>
+    <span class="nx">stores</span><span class="o">:</span> <span class="p">[],</span>
+<span class="p">}),</span>
+<span class="nx">methods</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">initialize</span> <span class="p">()</span> <span class="p">{</span>
+      <span class="nx">axios</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;/api/v1/stores&quot;</span><span class="p">).</span><span class="nx">then</span><span class="p">((</span><span class="nx">resp</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">stores</span> <span class="o">=</span> <span class="nx">resp</span><span class="p">.</span><span class="nx">data</span><span class="p">));</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+</code></pre></div>
+
+<h2 id="vue-app-deployment">Vue app deployment</h2>
 <p>See <a href="https://cli.vuejs.org/guide/deployment.html">product doc on deployment</a>.</p>
 <p>If the front end is a pure static app, it can be served by a http server. We need to properly use Cross Origin Resource Sharing.</p>
 <p>Get a docker file with build stage to use node and npm to build the front end page under dist, and a runtime stage that use nginx to expose the app. Add a nginx configuration.</p>
+<p>See quarkus section above for deployment with BFF.</p>
 <h2 id="reading">Reading</h2>
 <ul>
 <li><a href="https://medium.com/js-dojo/getting-started-with-vuejs-for-web-and-native-285dc64f0f0d">Getting started article</a> </li>
