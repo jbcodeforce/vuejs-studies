@@ -109,10 +109,29 @@ export default router
       </v-container>
     </v-content> 
 ```
+## Some interesting components
+
+### Rich text editor
+
+[Vue2 Editor](https://github.com/davidroyer/vue2-editor) and used in person-manager app:
+
+```js
+<v-col cols="12">
+  <vue-editor v-model="item.text"></vue-editor>
+</v-col>
+
+...
+import { VueEditor } from "vue2-editor"
+export default {
+  components: {
+    CardList,
+    VueEditor
+  },
+```
 
 ## Vue app with quarkus app
 
-Here are the steps to integrate Vue app in a quarkus app and develop both in parallel:
+Here are the steps to integrate Vue app in a Quarkus app and develop both in parallel:
 
 * Add [frontend-maven-plugin](https://mvnrepository.com/artifact/com.github.eirslett/frontend-maven-plugin) into the pom.xml to be able to build the JS app with maven:
 
@@ -159,7 +178,7 @@ Here are the steps to integrate Vue app in a quarkus app and develop both in par
 </plugin>
 ```
 
-* could add a maven profile to update the UI dependencies, but could also be done by vue and yarn build.
+* Could add a maven profile to update the UI dependencies, but could also be done by `Vue` and `yarn` build.
 * Add a build UI maven profile, 
 
 ```xml
@@ -192,13 +211,18 @@ Here are the steps to integrate Vue app in a quarkus app and develop both in par
     </profile>
 ```
 
-to build the webapp for production. This could be run with:
+To build the webapp for production. This could be run with:
 
 ```shell
 mvn package quarkus:dev -Dui.deps -Dui.dev
+
+# OR in the vue folder do
+yarn build 
+# in root folder
+mvn package -DskipTests
 ```
 
-* When doing development run the `vue serve` and quarkus dev into two different terminals but add a proxy configuration (file vue.config.js) for vue to match /api route to backend, and uses another port than 8080:
+* When doing development run the `vue serve` and `quarkus:dev` into two different terminals but add a proxy configuration (file vue.config.js) for vue to match /api route to backend, and uses another port than 8080:
 
  ```js
  module.exports = {
@@ -214,7 +238,7 @@ mvn package quarkus:dev -Dui.deps -Dui.dev
 }
  ```
 
-* Add quarkus resource with API definition
+* Add Quarkus resource with API definition
 
 ```java
     @GET
@@ -269,6 +293,8 @@ See [product doc on deployment](https://cli.vuejs.org/guide/deployment.html).
 If the front end is a pure static app, it can be served by a http server. We need to properly use Cross Origin Resource Sharing.
 
 Get a docker file with build stage to use node and npm to build the front end page under dist, and a runtime stage that use nginx to expose the app. Add a nginx configuration.
+
+See quarkus section above for deployment with BFF.
 
 ## Reading
 
