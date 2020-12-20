@@ -305,6 +305,18 @@
   </li>
 
     
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="vuetify/" title="Vuetify" class="md-nav__link">
+      Vuetify
+    </a>
+  </li>
+
+    
   </ul>
 </nav>
                   </div>
@@ -572,7 +584,7 @@ When using v-for it is recommended to give each rendered element its own unique 
 <ul>
 <li>Add <a href="https://mvnrepository.com/artifact/com.github.eirslett/frontend-maven-plugin">frontend-maven-plugin</a> into the pom.xml to be able to build the JS app with maven:</li>
 </ul>
-<p><div class="highlight"><pre><span></span><code><span class="c">&lt;!-- in properies--&gt;</span>
+<div class="highlight"><pre><span></span><code><span class="c">&lt;!-- in properies--&gt;</span>
 <span class="nt">&lt;version.frontend-maven-plugin&gt;</span>1.10.0<span class="nt">&lt;/version.frontend-maven-plugin&gt;</span>
 <span class="nt">&lt;version.resources-plugin&gt;</span>3.2.0<span class="nt">&lt;/version.resources-plugin&gt;</span>
 <span class="c">&lt;!-- in plugins --&gt;</span>
@@ -585,9 +597,12 @@ When using v-for it is recommended to give each rendered element its own unique 
       <span class="nt">&lt;/configuration&gt;</span>
     <span class="nt">&lt;/plugin&gt;</span>
 </code></pre></div>
-* Create the vue app under the <code>webapp</code> folder: <code>vue create webapp</code>
-* Remove src/main/resources/META-INF/resources/index.html from quarkus app
-* Using the <a href="https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-resources-plugin">maven resource plugin</a>, add to the pom the copy of the built webapp to the directory used by Quarkus</p>
+
+<ul>
+<li>Create the vue app under the <code>webapp</code> folder: <code>vue create webapp</code></li>
+<li>Remove src/main/resources/META-INF/resources/index.html from quarkus app</li>
+<li>Using the <a href="https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-resources-plugin">maven resource plugin</a>, add to the pom the copy of the built webapp to the directory used by Quarkus</li>
+</ul>
 <div class="highlight"><pre><span></span><code><span class="nt">&lt;plugin&gt;</span>
   <span class="nt">&lt;artifactId&gt;</span>maven-resources-plugin<span class="nt">&lt;/artifactId&gt;</span>
   <span class="nt">&lt;version&gt;</span>${version.resources-plugin}<span class="nt">&lt;/version&gt;</span>
@@ -736,6 +751,27 @@ mvn package -DskipTests
       
         
 <footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+        
+          <a href="vuetify/" title="Vuetify" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Vuetify
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
