@@ -2,6 +2,7 @@ site_name: Vue.js Studies
 repo_url: https://github.com/jbcodeforce/vuejs-studies.git
 nav:
   - Introduction: index.md
+  - Vuetify: vuetify.md
 
 theme: 
   name: material

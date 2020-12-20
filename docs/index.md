@@ -109,6 +109,7 @@ export default router
       </v-container>
     </v-content> 
 ```
+
 ## Some interesting components
 
 ### Rich text editor
@@ -149,6 +150,7 @@ Here are the steps to integrate Vue app in a Quarkus app and develop both in par
         </configuration>
       </plugin>
   ```
+  
 * Create the vue app under the `webapp` folder: `vue create webapp`
 * Remove src/main/resources/META-INF/resources/index.html from quarkus app
 * Using the [maven resource plugin](https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-resources-plugin), add to the pom the copy of the built webapp to the directory used by Quarkus
