@@ -14,8 +14,8 @@ The content of this repository is written with markdown files, packaged with [Mk
 
 ### Pushing the book to GitHub Pages
 
-1. Ensure that all your local changes to the `master` branch have been committed and pushed to the remote repository.
-    `git push origin master`
+1. Ensure that all your local changes to the `main` branch have been committed and pushed to the remote repository.
+    `git push origin main`
 1. Ensure that you have the latest commits to the `gh-pages` branch, so you can get others' updates.
 
 	```bash
