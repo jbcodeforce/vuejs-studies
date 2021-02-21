@@ -4,7 +4,9 @@ A progressive framework to be used in existing js app if needed. It is reactive 
 
 ## Getting Started
 
-* Get vue cli: `npm install -g @vue/cli@next`.
+* Get vue cli: `npm install -g @vue/cli@next`.  To upgrade existing project: `vue upgrade`
+* `vue -h` to get CLI help
+* Ensure to be on last version: `vue --version`
 * Start the `vue ui` to create a project and manage the build and every thing or...
 * Create a new project: `vue create project-name`
 * Start server: `npm run serve` or `yarn serve`
@@ -12,7 +14,7 @@ A progressive framework to be used in existing js app if needed. It is reactive 
 
 ## Basic concepts
 
-* First index.html page include vue scripts and a <div id="app">
+* First index.html page includes vue scripts and a <div id="app">
 * The `main.js` defines the Vue instance, links it to the single page app, and render the application and mounts the components to the #app of the index.html.
 * The App.vue defines the root component, page template. css and components to include.
 * Components are used in html template as element.
@@ -271,7 +273,7 @@ export default {
 
 ## Vue service to call backend api
 
-To call backend API, we need to add service and use the Promise based HTTP client:[axios](https://github.com/axios/axios) with some [Vue samples, here](https://vuejs.org/v2/cookbook/using-axios-to-consume-apis.html)
+To call backend API, we need to add service and use the Promise based HTTP client: [axios](https://github.com/axios/axios) with some [Vue samples, here](https://vuejs.org/v2/cookbook/using-axios-to-consume-apis.html)
 
 ### Load reference data
 
@@ -294,7 +296,31 @@ See [product doc on deployment](https://cli.vuejs.org/guide/deployment.html).
 
 If the front end is a pure static app, it can be served by a http server. We need to properly use Cross Origin Resource Sharing.
 
-Get a docker file with build stage to use node and npm to build the front end page under dist, and a runtime stage that use nginx to expose the app. Add a nginx configuration.
+Get a docker file with build stage to use `nodejs` and `npm `to build the front end page under `dist` folder, and a runtime stage that use `nginx` to expose the app. Add a nginx configuration.
+
+```
+FROM node:latest as build-stage
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY ./ .
+RUN npm run build
+
+FROM nginx as production-stage
+RUN mkdir /app
+COPY --from=build-stage /app/dist /app
+COPY nginx.conf /etc/nginx/nginx.conf
+```
+
+See example in [BetterToDoFrontEnd project.](https://github.com/jbcodeforce/BetterToDoFrontEnd)
+
+For getting access to back end service, use environment variables and in the axios code use something like (see [product doc](https://cli.vuejs.org/guide/mode-and-env.html)):
+
+```javascript
+const client = axios.create({
+    baseURL: process.env.VUE_APP_BASE_URL
+});
+```
 
 See quarkus section above for deployment with BFF.
 

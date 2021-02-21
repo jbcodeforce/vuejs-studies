@@ -6,7 +6,7 @@ Add the Vuetify plugin to Vue with
 vue add vuetify
 ```
 
-It creates a vuetify.js to inject the vutify components inside the vue app. 
+It creates a vuetify.js to inject the vuetify components inside the vue app. 
 
 With Vue 3 beta, use the following main.js to avoid 'get connection error'
 
