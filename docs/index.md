@@ -14,9 +14,9 @@ A progressive framework to be used in existing js app if needed. It is reactive 
 
 ## Basic concepts
 
-* First index.html page includes vue scripts and a <div id="app">
-* The `main.js` defines the Vue instance, links it to the single page app, and render the application and mounts the components to the #app of the index.html.
-* The App.vue defines the root component, page template. css and components to include.
+* First index.html page includes vuejs scripts and a `<div id="app">` 
+* The `main.js` defines the Vue app instance, links it to the single page app, and render the application and mounts the components to the #app of the index.html.
+* The App.vue defines the root component, page template. css and the components to include.
 * Components are used in html template as element.
 * CSS styles that will be applied to this component and any child component of this component
 * Data is interpolated via {{}} in html. It is used to display data.
@@ -53,6 +53,25 @@ A progressive framework to be used in existing js app if needed. It is reactive 
  ```
 
 * v-model is used to manipulate component data.
+
+## Organize code
+
+* Keep images in assets
+* components folder includes reusable components like header, footer... 
+* `main.js` defines the vue app and load router and other components
+* `App.vue` include the application template with Header, Footer... 
+
+```html
+<template>
+  <div id="app">
+    <Header/>
+    <router-view/>
+  </div>
+</template>
+```
+
+* Define a header with logout, and links to other content external to the app
+* Define content of the Home.vue with a left menu to comeback to the Home page. 
 
 ## Inventory app notes
 
@@ -324,7 +343,19 @@ const client = axios.create({
 
 See quarkus section above for deployment with BFF.
 
+## Serving VueApp with Python
+
+The static folder includes the outcome of the vuejs build.
+
+```python
+@app.route("/")
+def vueApp():
+    return send_from_directory('./static','index.html')
+
+```
+
 ## Reading
 
 * [Getting started article](https://medium.com/js-dojo/getting-started-with-vuejs-for-web-and-native-285dc64f0f0d) 
-* [Vue mastery course](https://www.vuemastery.com/courses/intro-to-vue-js/vue-instance/)
+* [Vue-JS mastery course](https://www.vuemastery.com/courses/intro-to-vue-js/vue-instance/)
+* [Carbon Design System](https://www.carbondesignsystem.com/developing/vue-tutorial/overview)
