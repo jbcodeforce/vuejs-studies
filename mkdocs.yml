@@ -3,6 +3,7 @@ repo_url: https://github.com/jbcodeforce/vuejs-studies.git
 nav:
   - Introduction: index.md
   - Vuetify: vuetify.md
+  - Carbon design: carbon.md
 
 theme: 
   name: material
