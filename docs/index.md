@@ -1,22 +1,35 @@
-# Vue.js studies
+# [Vue.js](https://vuejs.org/) studies
 
 A progressive framework to be used in existing js app if needed. It is reactive in the data binding mode.
 
 ## Getting Started
 
+> jbcodeforce/mynode is node v14.16 with yarn and vue@cli. So better to use this
+environment with the command:
+
+```sh
+docker run -ti -v $(pwd):/home -p 8090:8080 jbcodeforce/mynode bash 
+```
+
 * Get [vue cli](https://cli.vuejs.org/): 
 
     ```sh
     nvm use node
-
+    
     npm install -g @vue/cli@next
+    #or
+    yarn global add @vue/cli
     ```
+
     To upgrade existing project: `vue upgrade`
 
 * `vue -h` to get CLI help
 * Ensure to be on last version: `vue --version`
 * Start the `vue ui` to create a project and manage the build and every thing or...
-* Create a new project: `vue create project-name`
+* Create a new project: `vue create project-name`, then select the vue version.
+
+> As of 1/2022, vuetify does not support vue 3.x so when creating a project use v2.0
+
 * Start server: `npm run serve` or `yarn serve`
 * Browser to [http://localhost:8080](http://localhost:8080)
 
