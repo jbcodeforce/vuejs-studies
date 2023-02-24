@@ -1,43 +1,75 @@
 # [Vue.js](https://vuejs.org/) studies
 
-A progressive framework to be used in existing js app if needed. It is reactive in the data binding mode.
+A progressive framework to be used in existing js app if needed. It is reactive using the data binding mode.
+
+!!! Update
+    02/2023 migrate to full v3
 
 ## Getting Started
 
-> jbcodeforce/mynode is node v14.16 with yarn and vue@cli. So better to use this
+To isolate the development environment the DockerfileForNode give us all we need to run vuejs app.
+
+```sh
+docker build -f DockerfileForNode -t jbcodeforce/nodejs .
+```
+
+
+> jbcodeforce/nodejs  is node v19.6 with yarn and vue@cli. So better to use this
 environment with the command:
 
 ```sh
-docker run -ti -v $(pwd):/home -p 8090:8080 jbcodeforce/mynode bash 
+docker run -ti -v $(pwd):/app -p 8080:8080 -p 5173:5173 jbcodeforce/nodejs bash 
 ```
 
-* Get [vue cli](https://cli.vuejs.org/): 
+Use `./startDevEnv.sh` script.
 
-    ```sh
-    nvm use node
-    
-    npm install -g @vue/cli@next
-    #or
-    yarn global add @vue/cli
-    ```
+*Vue CLI is currently in maintenance mode and no longer the default tooling used to build Vue applications. Vuetify projects are now generated using [vite.](https://vitejs.dev/guide/)*
 
-    To upgrade existing project: `vue upgrade`
+### Create basic project
 
-* `vue -h` to get CLI help
-* Ensure to be on last version: `vue --version`
-* Start the `vue ui` to create a project and manage the build and every thing or...
-* Create a new project: `vue create project-name`, then select the vue version.
+```sh
+npm init vue@latest
+cd <projectname>
+npm install
+npm run dev
+```
 
-> As of 1/2022, vuetify does not support vue 3.x so when creating a project use v2.0
+Enter the project name and no to all other questions. Tos get the web pages visible from the host, modify the `package.json` on the dev statement with `vite --host` 
 
-* Start server: `npm run serve` or `yarn serve`
-* Browser to [http://localhost:8080](http://localhost:8080)
+As an alternate we can use vue cli:
+
+```sh
+vue create hello-world
+```
+
+* Start server: `npx serve` or `yarn serve`
+* Browser to [http://localhost:3000](http://localhost:3000)
+
+See [tutorial](https://vuejs.org/tutorial)
 
 ## Basic concepts
 
 * First index.html page includes vuejs scripts and a `<div id="app">` 
+
+  ```html
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+  ```
+
 * The `main.js` defines the Vue app instance, links it to the single page app,  
 renders the application and mounts the components to the `#app` of the index.html.
+
+  ```ts
+  import { createApp } from 'vue'
+  import App from './App.vue'
+
+  import './assets/main.css'
+
+  createApp(App).mount('#app')
+  ```
+  
 * The App.vue defines the root component, page template. css and the components to include.
 * Components are used in html template as element.
 * CSS styles that will be applied to this component and any child component of this component
@@ -65,7 +97,7 @@ renders the application and mounts the components to the `#app` of the index.htm
  ```js
  // in template
   <HelloWorld :msg="message"/>
- // ... in script
+ // ... in script section
  data(){
     return {
       message: 'Hello World!'
@@ -76,10 +108,11 @@ renders the application and mounts the components to the `#app` of the index.htm
 
 * v-model is used to manipulate component data.
 
+
 ## Organize code
 
 * Keep images in assets
-* components folder includes reusable components like header, footer... 
+* `components` folder includes reusable components like header, footer... 
 * `main.js` defines the vue app and load router and other components
 * `App.vue` include the application template with Header, Footer... 
 
@@ -119,39 +152,44 @@ When using v-for it is recommended to give each rendered element its own unique 
 
 * Vue dev tools provide helpful insight about your components
 
-## App router
+## [App router](https://router.vuejs.org/)
 
-* Add a router folder with an index.js to declare routes:
+vue-router helps to link components to route.
+
+* Define a router object in the main.js. This is from the last router version, and using vite for web server.
 
 ```js
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import {createRouter, createWebHistory } from 'vue-router'
+import Home from '@/components/Home.vue'
+import Login from '@/components/Login.vue'
 
-Vue.use(VueRouter)
+const router = createRouter({
+  history: createWebHistory(),
+  routes: [
+  {
+    path: '/',
+    name: 'home',
+    component: Home
+  }]
+})
 
-const routes = [
-    {
-      path: '/',
-      name: 'home',
-      component: Home
-    }
-]
-const router = new VueRouter({
-    routes
-  })
-export default router
+createApp(App)
+  .use(router)
+  .mount('#app')
 ```
 
 * Change the main App.vue by adding a content and a router-view object, remove the component declaration in the script section
 
-```xml
- <v-content>
-      <v-container>
-        <router-view />
-      </v-container>
-    </v-content> 
+```html
+<v-content>
+  <v-container>
+    <router-view />
+  </v-container>
+</v-content> 
 ```
+
+* we  can test with the different path defined in the routes. 
+* To add control over the URL access, like default to login, and access to home if authenticated. 
 
 ## Some interesting components
 
@@ -339,7 +377,7 @@ If the front end is a pure static app, it can be served by a http server. We nee
 
 Get a docker file with build stage to use `nodejs` and `npm `to build the front end page under `dist` folder, and a runtime stage that use `nginx` to expose the app. Add a nginx configuration.
 
-```
+```dockerfile
 FROM node:latest as build-stage
 WORKDIR /app
 COPY package*.json ./
@@ -376,8 +414,10 @@ def vueApp():
 
 ```
 
-## Reading
+## More Reading
 
 * [Getting started article](https://medium.com/js-dojo/getting-started-with-vuejs-for-web-and-native-285dc64f0f0d) 
 * [Vue-JS mastery course](https://www.vuemastery.com/courses/intro-to-vue-js/vue-instance/)
 * [Carbon Design System](https://www.carbondesignsystem.com/developing/vue-tutorial/overview)
+* [How To Serve Vue.js Application With NGINX and Docker](https://medium.com/bb-tutorials-and-thoughts/how-to-serve-vue-js-application-with-nginx-and-docker-d8a872a02ea8) and [product documentation]()
+* [Cognito - Vuejs](https://awstip.com/authenticate-users-with-vue-3-serverless-aws-cognito-82b7b82aab10)

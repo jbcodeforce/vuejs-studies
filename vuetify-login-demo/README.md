@@ -1,4 +1,4 @@
-# login-demo
+# vuetify-login-demo
 
 ## Project setup
 ```

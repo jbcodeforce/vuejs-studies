@@ -1,0 +1,4 @@
+FROM node:19
+RUN npm install -g @vue/cli @aws-amplify/cli@latest serve@latest vuetify@latest @aws-amplify/ui-vue aws-amplify
+
+EXPOSE 5173 3000 4173
