@@ -36,6 +36,7 @@ So `main.css` was removed from the `assets` folder, and webfontloader was added.
 
 The `src/App.vue` file includes components prefixed with `v-`. Similar to how Vue uses the prefix to indicate Vue-specific directives, this is how **Vuetify** indicates that these components are part of its library.
 
+* Add a Login.vue in components folder and base it with Vuetify v-text-field
 * Remove the  v-main
 
   ```html
@@ -107,12 +108,9 @@ and `v-card-text` to act as the wrapper for the body content in the v-card.
   </v-card-actions>
   ```
 
-* Clean the layout: set the card width to  400px, add spacing to the top and centering it Vuetify CSS utility 
-classes mt-5 (i.e., margin top 5 units) and mx-a (i.e., horizontal margin auto). 
-The spacing between login and the username input is also a little large
+* Clean the layout: set the card width to  400px, add spacing to the top and centering it Vuetify CSS utility classes mt-5 (i.e., margin top 5 units) and mx-a (i.e., horizontal margin auto). The spacing between login and the username input is also a little large.
 * Add `v-spacer` and `v-divider`.
-* Toggle Password Visibility: add a data property of showPassword, and use the `v-bind` directive to determine 
-whether the type of the field will be text or password
+* Toggle Password Visibility: add a data property of showPassword, and use the `v-bind` directive to determine whether the type of the field will be text or password
 
   ```html
   <v-text-field 
@@ -136,6 +134,32 @@ change to a visibility icon:
       @click:append="showPassword = !showPassword"
   />
   ```
+* Add data binding using input object:
+
+```js
+data: () => ({
+    input: { username: "", password: ""}
+  })
+```
+
+And then use `v-model` to bind the data from the text field to the variables.
+
+```js
+ <v-text-field label="Username"  v-model="input.username"/>
+ <v-text-field label="Password"  v-model="input.password"/>
+```
+
+* Add login methods in the script section:
+
+```js
+  methods: {
+    login() {
+      alert('Hello ' + this.input.username + ' !')
+    }
+  }
+```
+
+* Use [Pinia](https://pinia.vuejs.org/) to persist username and other global variables in Store. 
 
 * The last piece is to add calls to remote service to register or login.
 

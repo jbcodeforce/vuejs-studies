@@ -1,24 +1,35 @@
+<script setup>
+import { RouterLink, RouterView } from 'vue-router'
+</script>
+
 <template>
-  <v-app id="app">
+  <header>
+    <div class="navbar">
+      <nav>
+        <RouterLink to="/">Home</RouterLink> -
+        <RouterLink to="/login">Login</RouterLink>
+      </nav>
+    </div>
+  </header>
+
     <v-main>
       <v-container>
+        <p> Welcome the App</p>
         <router-view />
       </v-container>
     </v-main>
-  </v-app>
+
 </template>
 
-<script>
 
-
-export default {
-  name: 'App',
-
-  components: {
-  },
-  data: () => ({
-    showPassword: false
-  }),
-
+<style scoped>
+header {
+  line-height: 1.5;
+  max-height: 100vh;
 }
-</script>
+
+.navbar {
+    background-color: rgb(248, 153, 74);
+    padding: 1.2rem;
+  }
+</style>

@@ -1,30 +1,16 @@
 import { createApp } from 'vue'
-import {createRouter, createWebHistory } from 'vue-router'
-import App from './App.vue'
+import { createPinia } from 'pinia'
 import vuetify from './plugins/vuetify'
 import { loadFonts } from './plugins/webfontloader'
-import Home from '@/components/Home.vue'
-import Login from '@/components/Login.vue'
 
-const router = createRouter({
-  history: createWebHistory(),
-  routes: [
-  {
-    path: '/',
-    name: 'home',
-    component: Home
-  },
-  {
-      path: '/login',
-      name: 'login',
-      component: Login
-    }
-]
-})
+import router from './router'
+import App from './App.vue'
 
+const pinia = createPinia()
 loadFonts()
 
 createApp(App)
   .use(vuetify)
   .use(router)
+  .use(pinia)
   .mount('#app')

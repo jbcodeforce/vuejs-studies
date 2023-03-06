@@ -3,7 +3,7 @@
 A progressive framework to be used in existing js app if needed. It is reactive using the data binding mode.
 
 !!! Update
-    02/2023 migrate to full v3
+    02/2023 migrate to version 3
 
 ## Getting Started
 
@@ -34,22 +34,29 @@ npm install
 npm run dev
 ```
 
-Enter the project name and no to all other questions. Tos get the web pages visible from the host, modify the `package.json` on the dev statement with `vite --host` 
+Enter the project name and answer *no* to all other questions (in fact when using pinia for store data between component, select it and also may be Lint for code quality control). To get the web pages visible from the host, modify the `package.json` on the dev statement with `vite --host` .
 
-As an alternate we can use vue cli:
+As an alternate we can use vue cli (which seems to be in maintenance mode, and vite may replace it):
 
 ```sh
 vue create hello-world
 ```
 
-* Start server: `npx serve` or `yarn serve`
-* Browser to [http://localhost:3000](http://localhost:3000)
+And finally as we want to use Material and Vuetify, we could also use the vuetify CLI:
+
+```sh
+yarn create vuetify
+```
+
+* Start server: `npm run dev` or `yarn dev`
+* Browser to [http://localhost:5173](http://localhost:5173), at this time any code change will be visible in the browser.
 
 See [tutorial](https://vuejs.org/tutorial)
 
 ## Basic concepts
 
-* First index.html page includes vuejs scripts and a `<div id="app">` 
+* First the `index.html` page includes the vuejs scripts and a `<div id="app">` to hook the vue app.
+
 
   ```html
   <body>
@@ -70,10 +77,10 @@ renders the application and mounts the components to the `#app` of the index.htm
   createApp(App).mount('#app')
   ```
   
-* The App.vue defines the root component, page template. css and the components to include.
+* The `App.vue` defines the root component, page template, css and the components to use. When using router to navigate between page it includes the router-view element.
 * Components are used in html template as element.
 * CSS styles that will be applied to this component and any child component of this component
-* Data is interpolated via {{}} in html. It is used to display data.
+* Data is interpolated via {{}} in html. 
  
  ```html
  <template>
@@ -81,7 +88,7 @@ renders the application and mounts the components to the `#app` of the index.htm
     <h1>{{ msg }}</h1>
  ```
 
- and can be object or property and declared in the component: 
+ and can be object or property and declared in the component. Below props are the input parameters the user of the component can use to inject data, like the msg.
 
  ```js
  export default {
@@ -92,7 +99,7 @@ renders the application and mounts the components to the `#app` of the index.htm
  }
  ```
 
-* data object can be injected via data binding in a reactive way: when properties of this data object change, Vue reacts to and digests the changes.
+* Data object can be injected via data binding in a reactive way: when properties of this data object change, Vue reacts to and digests the changes.
 
  ```js
  // in template
@@ -106,15 +113,16 @@ renders the application and mounts the components to the `#app` of the index.htm
 
  ```
 
-* v-model is used to manipulate component data.
+* VueJS requires data to be a function so that each instance of the component can maintain an independent copy of the returned data object.
+* `v-model` is used to manipulate component data.
 
 
 ## Organize code
 
 * Keep images in assets
 * `components` folder includes reusable components like header, footer... 
-* `main.js` defines the vue app and load router and other components
-* `App.vue` include the application template with Header, Footer... 
+* `main.js` defines the Vue app and load router and other components
+* `App.vue` includes the application template with Header, Footer... and the result of the URL routing (see later section). 
 
 ```html
 <template>
@@ -127,6 +135,54 @@ renders the application and mounts the components to the `#app` of the index.htm
 
 * Define a header with logout, and links to other content external to the app
 * Define content of the Home.vue with a left menu to comeback to the Home page. 
+* Add a `stores` folder to keep pinia store declaration. See next section.
+
+## [Sharing data between components](https://vueschool.io/articles/vuejs-tutorials/techniques-for-sharing-data-between-vue-js-components/)
+
+* The first technique for passing data is with `props`. They allow us to transfer data from a parent to a child component.
+
+* 2nd one is to emit Events from a child component to its parent component. In the child component: the username is the data and changeUsername is the event type.
+
+```html
+<form action="submit" @submit.prevent="$emit('changeUsername', username)">
+      <input 
+                type="text" 
+                v-model="username" 
+                placeholder="Enter your name" />
+      ...
+```
+
+And in the parent calling the child passing the callback function to use to process the event. username is an attribute inside the parent now.
+
+```html
+<ChildComponent
+      @changeUsername="
+        (payload) => { username = payload;
+        }
+      "
+    />
+```
+
+### Pinia
+
+* Finally, Stores introduce an advanced method of passing data across multiple components by eliminating the problem of prop drilling. Popular state management tools for Vue.js include [Pinia](https://pinia.vuejs.org/) or [Vuex](https://vuex.vuejs.org/) (that is not recommended anymore).
+
+Initialize pinia in the `main.js` file
+
+```js
+import { createPinia } from 'pinia'
+//....
+const app = createApp(App)
+
+app.use(createPinia())
+```
+
+Then use the store in a view or component:
+
+```
+```
+
+See a complete tutorial in this article: [Vue 3 and state management with Pinia](https://blog.logrocket.com/complex-vue-3-state-management-pinia/) and code in `vue-pinia` folder.
 
 ## Inventory app notes
 
@@ -143,6 +199,7 @@ When using v-for it is recommended to give each rendered element its own unique 
   * You can specify the type of event to listen for: click, mouseover, any other DOM event
   * The v-on directive can trigger a method, Triggered methods can take in arguments
   * `this` refers to the current Vue instance’s data as well as other methods declared inside the instance
+
 * Data can be bound to an element’s style attribute, an element’s class. We can use expressions inside an element’s class binding to evaluate whether a class should appear or not.
 * Computed properties calculate a value rather than store a value.
 * Components are blocks of code, grouped together within a custom element. They make applications more manageable by breaking up the whole into reusable parts that have their own structure and behavior. 
@@ -156,7 +213,7 @@ When using v-for it is recommended to give each rendered element its own unique 
 
 vue-router helps to link components to route.
 
-* Define a router object in the main.js. This is from the last router version, and using vite for web server.
+* Define a router object in the main.js. This is from the last router version, and using [vite](https://vitejs.dev/guide/) server.
 
 ```js
 import {createRouter, createWebHistory } from 'vue-router'
@@ -178,7 +235,8 @@ createApp(App)
   .mount('#app')
 ```
 
-* Change the main App.vue by adding a content and a router-view object, remove the component declaration in the script section
+* The router instance can be accessed in any component via `this.$router`
+* Change the main App.vue by adding a content and a `router-view` object, remove the component declaration in the script section
 
 ```html
 <v-content>
@@ -188,8 +246,23 @@ createApp(App)
 </v-content> 
 ```
 
-* we  can test with the different path defined in the routes. 
-* To add control over the URL access, like default to login, and access to home if authenticated. 
+* We  can test with the different paths defined in the routes. 
+* URL can have parameter that can be accessed in the component:
+
+```js
+const routes = [
+  // dynamic segments start with a colon
+  { path: '/users/:id', component: User },
+]
+```
+
+and access it via: `this.$route.params`
+
+* To add control over the URL access, like access to a view only of the user is authenticated, we need to use [Guard](https://router.vuejs.org/guide/advanced/navigation-guards.html#in-component-guards).
+
+```
+```
+
 
 ## Some interesting components
 
@@ -359,14 +432,15 @@ To call backend API, we need to add service and use the Promise based HTTP clien
 ```js
 import axios from "axios";
 export default {
-data: () => ({
-    stores: [],
-}),
-methods: {
-    initialize () {
-      axios.get("/api/v1/stores").then((resp) => (this.stores = resp.data));
+  data: () => ({
+      stores: [],
+  }),
+  methods: {
+      initialize () {
+        axios.get("/api/v1/stores").then((resp) => (this.stores = resp.data));
+      }
     }
-  }
+}
 ```
 
 ## Vue app deployment
